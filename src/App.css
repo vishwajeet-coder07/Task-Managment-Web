@@ -30,11 +30,10 @@ padding: 0 1vh;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 700;
-background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #007bff;
   color: white;
   font-size: 16px;
   margin-top: 2vh;
-  transition: background-image 0.3s ease;
 }
 .bigcontainer{
   display: flex;
@@ -45,19 +44,17 @@ background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background-color: rgba(231, 226, 226, 0.3);
+  background-color: #f8f9fa;
   position: absolute;
   top: 0;
   left: 0;
   height: 10vh;
   width: 100%;
   z-index: 1000;
-  border-bottom-left-radius: 2vh;
-  border-bottom-right-radius: 2vh;
 }
 
 .navbar h1 {
-  color: white;
+  color: #333;
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
@@ -72,11 +69,10 @@ background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .nav-links li {
-  color: white;
+  color: #333;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: color 0.3s ease;
 }
 .nav-links li:hover {
   color: #007bff;
@@ -91,27 +87,25 @@ background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 .footer {
   width: 100%;
   height: 10vh;
-  background-color: rgba(231, 226, 226, 0.6);
+  background-color: #f8f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(69, 67, 67);
+  color: #333;
   font-size: 1rem;
   font-weight: 500;
   position: absolute;
   bottom: 0;
   left: 0;
-  border-top-left-radius: 2vh;
-  border-top-right-radius: 2vh;
 }
 .container.third{
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #e9ecef;
 }
 .container.second{
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #f8f9fa;
 }   
 .container.first{
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #dee2e6;
 }
 body{
   display: flex;
@@ -119,70 +113,4 @@ body{
   align-items: center;
   margin: 0;
   padding-top: 5vh;
-}
-/* responsive*/
-@media (max-width: 900px) {
-  .bigcontainer{
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 780px) {
-  body{
-    padding-top: 2vh;
-  }
-  .bigcontainer{
-    flex-direction: column;
-    align-items: center;
-  }
-  .container{
-    margin: 2vh 0;
-  }
-  .navbar {
-    padding: 0 1rem;
-  }
-  .navbar h1 {
-    font-size: 1.2rem;
-  }
-  .nav-links {
-    gap: 1rem;
-  }
-  .nav-links li {
-    font-size: 0.9rem;
-  }
-}
-@media (max-width: 400px) {
-  .container{
-    width: 90vw;
-    height: auto;
-  }
-  .container-btn{
-    font-size: 12px;
-    padding: 8px 5px;
-  }
-  .container-list{
-    font-size: 14px;
-  }
-  .container-header{
-    font-size: 18px;
-  }
-  .navbar {
-    padding: 0 0.5rem;
-    flex-direction: column;
-    height: auto;
-    padding: 1rem 0.5rem;
-  }
-  .navbar h1 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .nav-links {
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .nav-links li {
-    font-size: 0.8rem;
-  }
 }

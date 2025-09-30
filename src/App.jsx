@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
-import Btn from './components/Button.jsx';
+import Button from './components/Button.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
       <TodoItem text="Todo 2" />
       <TodoItem text="Todo 3" />
       <TodoItem text="Todo 4" />
-      <Btn />
+      <Button />
     </div>
      <div className="container second">
       <Header text="In Progress" />
@@ -25,7 +25,7 @@ const App = () => {
       <TodoItem text="Todo 2" />
       <TodoItem text="Todo 3" />
       <TodoItem text="Todo 4" />
-      <Btn />
+      <Button />
     </div>
      <div className="container third">
       <Header text="Completed" />
@@ -33,7 +33,7 @@ const App = () => {
       <TodoItem text="Todo 2" />
       <TodoItem text="Todo 3" />
       <TodoItem text="Todo 4" />
-      <Btn />
+      <Button />
     </div>
     </div>
     <Footer />
