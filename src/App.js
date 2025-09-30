@@ -3,8 +3,11 @@ import React from 'react';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
 import Btn from './components/Button';
+import Navbar from './components/navbar';
 const App = () => {
   return (
+    <div className="App">
+      <Navbar />
     <div className='bigcontainer'>
     <div className="container first">
       <Header />
@@ -29,6 +32,7 @@ const App = () => {
       <TodoItem text="Todo 11" />
       <TodoItem text="Todo 12" />
       <Btn />
+    </div>
     </div>
     </div>
   )

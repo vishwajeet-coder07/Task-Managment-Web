@@ -15,6 +15,9 @@ text-align: center;
   justify-content: space-between;
   align-items: center;  
 }
+.container-list p ,span{
+line-height: 10vh;
+}
 .container-btn{
   width: 100%;
   padding: 10px 10px;
@@ -25,4 +28,136 @@ text-align: center;
 }
 .bigcontainer{
   display: flex;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: rgb(33, 32, 32);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 2vh;
+}
+
+.navbar h1 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #007bff;
+}
+.App{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* responsive*/
+@media (max-width: 900px) {
+  .bigcontainer{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.container.third{
+  background-color: rgb(80, 80, 80);
+}
+.container.second{
+  background-color: rgb(131, 130, 130);
+}   
+.container.first{
+  background-color: rgb(179, 176, 176);
+}
+body{
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding-top: 5vh;
+}
+
+@media (max-width: 780px) {
+  body{
+    padding-top: 2vh;
+  }
+  .bigcontainer{
+    flex-direction: column;
+    align-items: center;
+  }
+  .container{
+    margin: 2vh 0;
+  }
+  .navbar {
+    padding: 0 1rem;
+  }
+  .navbar h1 {
+    font-size: 1.2rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  .nav-links li {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 400px) {
+  .container{
+    width: 90vw;
+    height: auto;
+  }
+  .container-btn{
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+  .container-list{
+    font-size: 14px;
+  }
+  .container-header{
+    font-size: 18px;
+  }
+  .navbar {
+    padding: 0 0.5rem;
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0.5rem;
+  }
+  .navbar h1 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .nav-links {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-links li {
+    font-size: 0.8rem;
+  }
 }
