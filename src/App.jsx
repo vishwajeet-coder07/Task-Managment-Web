@@ -3,8 +3,8 @@ import React from 'react';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
 import Btn from './components/Button.jsx';
-import Navbar from './components/navbar.jsx';
-import Footer from './components/footer.jsx';
+import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
 const App = () => {
   return (
     <div className="App">
