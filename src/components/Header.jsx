@@ -1,8 +1,8 @@
 import React from "react";
 
-const Header = () => {
+const Header = (props) => {
     return <h1 className="container-header">
-        Todo
+        {props.text}
      </h1>
 };
 export default Header;
