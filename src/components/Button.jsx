@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-const Button = () => {
-return<button className="container-btn">Add Todo</button>
-};
-
- export default Button;
+export default function Button({ onAddTodo }) {
+  return (
+    <button className='btn-todo' onClick={onAddTodo}>Add Todo</button>
+  )
+}

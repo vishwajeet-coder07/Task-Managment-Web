@@ -1,9 +1,14 @@
 .container{
-  height: 50vh;
+  min-height: 50vh;
+  max-height: 70vh;
   width: 25vw;
   padding: 10px;
   margin: 5vh;
   border-radius: 2vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .container-header{
 font-family: cursive;
@@ -13,10 +18,48 @@ text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 8px 12px;
   font-size: 16px;
   font-weight: 600;
-  border-radius:0.2vh;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: rgba(248, 249, 250, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 50px;
+  transition: all 0.2s ease;
+}
+
+.container-list span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.todo-content-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-content-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.todo-content-area::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.todo-content-area::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
 }
 .container-list p ,span{
 line-height: 10vh;
@@ -30,11 +73,153 @@ padding: 0 1vh;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 700;
-background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-size: 16px;
-  margin-top: 2vh;
-  transition: background-image 0.3s ease;
+  margin-top: auto;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.container-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-todo {
+  position: relative;
+  width: 100%;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-todo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.1);
+}
+
+/* Todo editing styles */
+.todo-text-display {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+}
+
+.todo-text-display:hover {
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.edit-input {
+  border: 2px solid #667eea;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: white;
+  flex: 1;
+  min-width: 0;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.edit-input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 2px rgba(118, 75, 162, 0.3);
+}
+
+.container-list.editing {
+  background-color: rgba(102, 126, 234, 0.05);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+  transform: scale(1.1);
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+  transform: scale(1.1);
 }
 .bigcontainer{
   display: flex;
@@ -46,7 +231,7 @@ background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   align-items: center;
   padding: 0 2rem;
   background-color: rgba(231, 226, 226, 0.3);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 10vh;
@@ -208,25 +393,6 @@ background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 .login-btn:active {
   transform: translateY(0);
 }
-
-/* Responsive adjustments for registration */
-@media (max-width: 480px) {
-  .login-form, .register-form {
-    padding: 1.5rem;
-    margin: 10px;
-  }
-  
-  .login-form h2 {
-    font-size: 1.5rem;
-  }
-}
-.App{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 .footer {
   width: 100%;
   height: 10vh;
@@ -259,6 +425,30 @@ body{
   margin: 0;
   padding-top: 5vh;
 }
+.App{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments for registration */
+@media (max-width: 480px) {
+  .login-form, .register-form {
+    padding: 1.5rem;
+    margin: 10px;
+  }
+  
+  .login-form h2 {
+    font-size: 1.5rem;
+  }
+  .footer{
+    position: static;
+    bottom: 0;
+    left: 0;
+  }
+}
 /* responsive*/
 @media (max-width: 900px) {
   .bigcontainer{
@@ -277,6 +467,9 @@ body{
   }
   .container{
     margin: 2vh 0;
+    width: 80vw;
+    min-height: 45vh;
+    max-height: 65vh;
   }
   .navbar {
     padding: 0 1rem;
@@ -294,17 +487,32 @@ body{
 @media (max-width: 400px) {
   .container{
     width: 90vw;
-    height: auto;
+    min-height: 40vh;
+    max-height: 60vh;
   }
-  .container-btn{
+  .container-btn, .btn-todo{
     font-size: 12px;
     padding: 8px 5px;
   }
   .container-list{
     font-size: 14px;
+    min-height: 40px;
   }
   .container-header{
     font-size: 18px;
+  }
+  .delete-btn, .save-btn, .cancel-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  .edit-input {
+    font-size: 14px;
+    padding: 3px 6px;
+  }
+  .todo-text-display {
+    font-size: 14px;
+    padding: 3px 6px;
   }
   .navbar {
     padding: 0 0.5rem;

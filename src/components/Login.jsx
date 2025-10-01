@@ -49,7 +49,6 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
                 <p className="auth-switch">
                     Don't have an account?{" "}
                     <span className="auth-link" onClick={onSwitchToRegister}>
-                        {/* onswitch to register this link */}
                         Register here
                     </span>
                 </p>

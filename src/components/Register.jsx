@@ -15,7 +15,6 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
             ...prev,
             [name]: value
         }));
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -26,7 +25,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
     
     const validateForm = () => {
         const newErrors = {};
-
+       // newErrors.vish = "hello";
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!formData.email) {
@@ -62,7 +61,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const validationErrors = validateForm();
-        
+
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
