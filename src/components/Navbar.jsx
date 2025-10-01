@@ -1,6 +1,12 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ onLogout }) => {
+    const handleLogoutClick = () => {
+        if (onLogout) {
+            onLogout(); 
+        }
+    };
+
     return (
         <nav className="navbar">
             <h1>Task Management App</h1>
@@ -9,7 +15,9 @@ const Navbar = () => {
                 <li>About</li>
                 <li>Contact</li>
                 <li>Profile</li>
-                <li>Logout</li>
+                <li onClick={handleLogoutClick} className="logout-link">
+                    Logout
+                </li>
             </ul>
         </nav>
     );

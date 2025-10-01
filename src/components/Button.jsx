@@ -1,7 +1,7 @@
 import React from "react";
 
-const Btn = () => {
+const Button = () => {
 return<button className="container-btn">Add Todo</button>
 };
 
- export default Btn;
+ export default Button;
