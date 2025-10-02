@@ -1,11 +1,10 @@
-import './App.css';
+import './App.css'; 
 import React, { useState } from 'react';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
 import Navbar from './components/navbar.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
-
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [showRegister, setShowRegister] = useState(false);

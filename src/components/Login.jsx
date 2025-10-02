@@ -1,8 +1,18 @@
 import React, { useState } from "react";
+import { getinfo } from './api.js';
+import { useEffect } from "react";
 
 const Login = ({ onLogin, onSwitchToRegister }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getinfo();
+            console.log(data);
+        };
+        fetchData();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();

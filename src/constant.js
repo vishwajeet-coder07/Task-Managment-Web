@@ -1,0 +1,1 @@
+export const apiBaseUrl = 'https://progress-tracker-typescript1.onrender.com/api';

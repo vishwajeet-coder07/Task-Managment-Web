@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { registerUser } from './api.js';
 
 const Register = ({ onRegister, onSwitchToLogin }) => {
     const [formData, setFormData] = useState({
         email: "",
-        username: "",
+        fullname: "",
         password: "",
         confirmPassword: ""
     });
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [apiError, setApiError] = useState("");
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -33,11 +36,11 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
             newErrors.email = "Please enter a valid email address";
         }
 
-        // Username validation
-        if (!formData.username) {
-            newErrors.username = "Username is required";
-        } else if (formData.username.length < 3) {
-            newErrors.username = "Username must be at least 3 characters";
+        // Fullname validation
+        if (!formData.fullname) {
+            newErrors.fullname = "Full name is required";
+        } else if (formData.fullname.length < 2) {
+            newErrors.fullname = "Full name must be at least 2 characters";
         }
 
         // Password validation
@@ -57,7 +60,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm();
 
@@ -66,9 +69,27 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
             return;
         }
 
-        // Simulate successful registration
-        alert(`Account created successfully for ${formData.email}!`);
-        onRegister();
+        setIsLoading(true);
+        setApiError("");
+
+        try {
+            const result = await registerUser({
+                email: formData.email,
+                fullName: formData.fullname,
+                password: formData.password
+            });
+
+            if (result.success) {
+                alert(`Account created successfully for ${formData.email}!`);
+                onRegister();
+            } else {
+                setApiError(result.error || "Registration failed. Please try again.");
+            }
+        } catch (error) {
+            setApiError("Network error. Please check your connection and try again.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -76,6 +97,18 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
             <div className="login-form register-form">
                 <h2> Create Account</h2>
                 <form onSubmit={handleSubmit}>
+                    {apiError && (
+                        <div className="error-message" style={{
+                            color: '#ff4444',
+                            backgroundColor: '#ffebee',
+                            padding: '10px',
+                            borderRadius: '4px',
+                            marginBottom: '15px',
+                            border: '1px solid #ffcdd2'
+                        }}>
+                            {apiError}
+                        </div>
+                    )}
                     <div className="form-group">
                         <label htmlFor="email">📧 Email Address:</label>
                         <input
@@ -90,17 +123,17 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
                         {errors.email && <span className="error-text">{errors.email}</span>}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="username">👤 Username:</label>
+                        <label htmlFor="fullname">👤 Full Name:</label>
                         <input
                             type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
+                            id="fullname"
+                            name="fullname"
+                            value={formData.fullname}
                             onChange={handleChange}
-                            placeholder="Choose a username"
-                            className={errors.username ? "error" : ""}
+                            placeholder="Enter your full name"
+                            className={errors.fullname ? "error" : ""}
                         />
-                        {errors.username && <span className="error-text">{errors.username}</span>}
+                        {errors.fullname && <span className="error-text">{errors.fullname}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">🔒 Password:</label>
@@ -128,8 +161,8 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
                         />
                         {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
                     </div>
-                    <button type="submit" className="login-btn">
-                        Create Account
+                    <button type="submit" className="login-btn" disabled={isLoading}>
+                        {isLoading ? "Creating Account..." : "Create Account"}
                     </button>
                 </form>
                 <p className="auth-switch">
