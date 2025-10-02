@@ -16,10 +16,10 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
     return (
         <div className="login-container">
             <div className="login-form">
-                <h2>Login to Task Management</h2>
+                <h2>🔑 Login to Task Management</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="username">Username or Email:</label>
+                        <label htmlFor="username">👤 Username or Email:</label>
                         <input
                             type="text"
                             id="username"
@@ -29,7 +29,7 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">🔒 Password:</label>
                         <input
                             type="password"
                             id="password"

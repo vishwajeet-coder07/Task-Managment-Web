@@ -8,7 +8,6 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
         confirmPassword: ""
     });
     const [errors, setErrors] = useState({});
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -75,10 +74,10 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
     return (
         <div className="login-container">
             <div className="login-form register-form">
-                <h2>Create Account</h2>
+                <h2> Create Account</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="email">Email Address:</label>
+                        <label htmlFor="email">📧 Email Address:</label>
                         <input
                             type="email"
                             id="email"
@@ -91,7 +90,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
                         {errors.email && <span className="error-text">{errors.email}</span>}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">👤 Username:</label>
                         <input
                             type="text"
                             id="username"
@@ -104,7 +103,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
                         {errors.username && <span className="error-text">{errors.username}</span>}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">🔒 Password:</label>
                         <input
                             type="password"
                             id="password"
@@ -117,7 +116,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
                         {errors.password && <span className="error-text">{errors.password}</span>}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirm Password:</label>
+                        <label htmlFor="confirmPassword">🔐 Confirm Password:</label>
                         <input
                             type="password"
                             id="confirmPassword"

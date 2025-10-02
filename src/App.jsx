@@ -2,19 +2,18 @@ import './App.css';
 import React, { useState } from 'react';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
-import Button from './components/Button.jsx';
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from './components/navbar.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [showRegister, setShowRegister] = useState(false);
+  const [newTodoText, setNewTodoText] = useState('');
   
   // Todo state management
   const [todos, setTodos] = useState({
-    projectStart: [
+    todoList: [
       { id: 1, text: 'Design user interface' },
       { id: 2, text: 'Set up project structure' },
       { id: 3, text: 'Create wireframes' }
@@ -30,19 +29,31 @@ const App = () => {
     ]
   });
 
-  // Add todo function
-  const addTodo = (column) => {
+  // Add todo function - only adds to todoList
+  const addTodo = (todoText) => {
     const allTodos = Object.values(todos).flat();
     const existingIds = allTodos.length > 0 ? allTodos.map(todo => todo.id) : [0];
     const newId = Math.max(...existingIds) + 1;
     const newTodo = {
       id: newId,
-      text: `New Todo ${(todos[column]?.length || 0) + 1}`
+      text: todoText.trim() || `New Todo ${(todos.todoList?.length || 0) + 1}`
     };
     
     setTodos(prevTodos => ({
       ...prevTodos,
-      [column]: [...(prevTodos[column] || []), newTodo]
+      todoList: [...(prevTodos.todoList || []), newTodo]
+    }));
+  };
+
+  // Move todo between columns
+  const moveTodo = (todoId, fromColumn, toColumn) => {
+    const todoToMove = todos[fromColumn]?.find(todo => todo.id === todoId);
+    if (!todoToMove) return;
+
+    setTodos(prevTodos => ({
+      ...prevTodos,
+      [fromColumn]: prevTodos[fromColumn].filter(todo => todo.id !== todoId),
+      [toColumn]: [...(prevTodos[toColumn] || []), todoToMove]
     }));
   };
 
@@ -98,23 +109,46 @@ const App = () => {
     }
     return <Login onLogin={handleLogin} onSwitchToRegister={switchToRegister} />;
   }
+  // Handle add todo from input bar
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if (newTodoText.trim()) {
+      addTodo(newTodoText);
+      setNewTodoText('');
+    }
+  };
+
   return (
     <div className="App">
       <Navbar onLogout={handleLogout} />
+      <div className="add-todo-bar">
+        <form onSubmit={handleAddTodo} className="add-todo-form">
+          <input
+            type="text"
+            value={newTodoText}
+            onChange={(e) => setNewTodoText(e.target.value)}
+            placeholder="Add a new task..."
+            className="add-todo-input"
+          />
+          <button type="submit" className="add-todo-btn">➕ Add Task</button>
+        </form>
+      </div>
       <div className='bigcontainer'>
         <div className="container first">
-          <Header text="Project-start" />
+          <Header text="Todo-List" />
           <div className="todo-content-area">
-            {todos.projectStart?.map(todo => (
+            {todos.todoList?.map(todo => (
               <TodoItem 
                 key={todo.id} 
-                text={todo.text} 
-                onDelete={() => deleteTodo('projectStart', todo.id)}
-                onUpdate={(newText) => updateTodo('projectStart', todo.id, newText)}
+                text={todo.text}
+                column="todoList"
+                todoId={todo.id}
+                onDelete={() => deleteTodo('todoList', todo.id)}
+                onUpdate={(newText) => updateTodo('todoList', todo.id, newText)}
+                onMove={moveTodo}
               />
             ))}
           </div>
-          <Button onAddTodo={() => addTodo('projectStart')} />
         </div>
         <div className="container second">
           <Header text="In Progress" />
@@ -122,13 +156,15 @@ const App = () => {
             {todos.inProgress?.map(todo => (
               <TodoItem 
                 key={todo.id} 
-                text={todo.text} 
+                text={todo.text}
+                column="inProgress"
+                todoId={todo.id}
                 onDelete={() => deleteTodo('inProgress', todo.id)}
                 onUpdate={(newText) => updateTodo('inProgress', todo.id, newText)}
+                onMove={moveTodo}
               />
             ))}
           </div>
-          <Button onAddTodo={() => addTodo('inProgress')} />
         </div>
         <div className="container third">
           <Header text="Completed" />
@@ -136,16 +172,17 @@ const App = () => {
             {todos.completed?.map(todo => (
               <TodoItem 
                 key={todo.id} 
-                text={todo.text} 
+                text={todo.text}
+                column="completed"
+                todoId={todo.id}
                 onDelete={() => deleteTodo('completed', todo.id)}
                 onUpdate={(newText) => updateTodo('completed', todo.id, newText)}
+                onMove={moveTodo}
               />
             ))}
           </div>
-          <Button onAddTodo={() => addTodo('completed')} />
         </div>
       </div>
-      <Footer />
     </div>
   )
 };

@@ -9,14 +9,12 @@ const Navbar = ({ onLogout }) => {
 
     return (
         <nav className="navbar">
-            <h1>Task Management App</h1>
+            <h1>📋 Task Management App</h1>
             <ul className="nav-links">
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li>Profile</li>
+                <li>🏠 Home</li>
+                <li>👤 Profile</li>
                 <li onClick={handleLogoutClick} className="logout-link">
-                    Logout
+                    🚪 Logout
                 </li>
             </ul>
         </nav>

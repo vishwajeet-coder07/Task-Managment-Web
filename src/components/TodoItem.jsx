@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 
-const TodoItem = ({ text, onDelete, onUpdate }) => {
-    const [done, setDone] = useState("...")
+const TodoItem = ({ text, onDelete, onUpdate, column, todoId, onMove }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(text);
-
-    let status = done;
-    if (status === "...") {
-        status = "done";
-    } else {
-        status = "..."
-    }
 
     const handleEditStart = () => {
         setIsEditing(true);
@@ -36,11 +28,33 @@ const TodoItem = ({ text, onDelete, onUpdate }) => {
             handleEditCancel();
         }
     };
+
+    const handleCheckboxChange = () => {
+        let targetColumn;
+        
+        // Define the flow: todoList -> inProgress -> completed (no further movement)
+        if (column === 'todoList') {
+            targetColumn = 'inProgress';
+        } else if (column === 'inProgress') {
+            targetColumn = 'completed';
+        }
+        // Completed tasks don't move anywhere - they stay completed
+        
+        if (targetColumn) {
+            onMove(todoId, column, targetColumn);
+        }
+    };
     
     return (
-        <li className={`container-list ${isEditing ? 'editing' : ''}`}>
+        <li className={`container-list ${isEditing ? 'editing' : ''} ${column === 'completed' ? 'completed' : ''}`}>
             <span>
-                <input type="checkbox" onClick={() => setDone(status)} />
+                <input 
+                    type="checkbox" 
+                    onChange={handleCheckboxChange}
+                    checked={column === 'completed'}
+                    disabled={column === 'completed'}
+                    title={column === 'todoList' ? 'Move to In Progress' : column === 'inProgress' ? 'Mark as Completed' : 'Task Completed'}
+                />
                 {isEditing ? (
                     <input
                         type="text"
@@ -62,7 +76,6 @@ const TodoItem = ({ text, onDelete, onUpdate }) => {
                 )}
             </span>
             <div className="todo-actions">
-                <p>{done}</p>
                 {isEditing ? (
                     <div className="edit-actions">
                         <button 
@@ -70,14 +83,14 @@ const TodoItem = ({ text, onDelete, onUpdate }) => {
                             onClick={handleEditSave}
                             title="Save changes"
                         >
-                            ✓
+                            💾
                         </button>
                         <button 
                             className="cancel-btn" 
                             onClick={handleEditCancel}
                             title="Cancel editing"
                         >
-                            ×
+                            ❌
                         </button>
                     </div>
                 ) : (
@@ -86,7 +99,7 @@ const TodoItem = ({ text, onDelete, onUpdate }) => {
                         onClick={onDelete}
                         title="Delete todo"
                     >
-                        ×
+                        ❌
                     </button>
                 )}
             </div>
